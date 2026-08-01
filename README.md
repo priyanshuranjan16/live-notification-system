@@ -37,7 +37,7 @@ The system features a **hybrid Next.js + Express architecture** running seamless
 ### Architectural Highlights
 - **Unified Server**: Custom Express HTTP server hosting both Next.js request handler and Socket.IO real-time engine on port `3000`.
 - **Targeted WebSocket Broadcasting**: Notifications are emitted directly to user-specific WebSocket rooms (`user_<userId>`), avoiding unnecessary broad network broadcasts.
-- **Automated Cron Service**: `node-cron` background scheduler checks every 2 minutes for pending activities and dispatches system notifications to users.
+- **Automated Cron Service**: `node-cron` background scheduler checks every 30 minutes for pending activities and dispatches system notifications to users.
 - **Transactional Consistency**: Entity creations and assignments write atomically to PostgreSQL via Prisma ORM before triggering real-time alerts.
 
 ---
@@ -177,9 +177,4 @@ Open your browser and visit: **`http://localhost:3000`**
 
 ---
 
-## 🔔 Key Features
 
-- 🎧 **Web Audio Synthesizer**: Uses Web Audio API for custom generated chime audio alerts without external MP3 asset dependency.
-- ⚡ **Instant Multi-User Switching**: Seamlessly switch active user identity in the UI header to test real-time targeted notification delivery.
-- 📊 **Real-Time Toast Notifications**: Live badge counters, slide-out notification drawer, filter by read/unread status, and bulk "Mark all as read".
-- 📈 **Interactive CRM Dashboard**: Quick stats cards, assignment manager, company directory, and contact directory with search filters.
