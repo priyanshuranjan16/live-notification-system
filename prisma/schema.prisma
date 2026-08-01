@@ -1,0 +1,96 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  SYSTEM_ADMIN
+  SUPREME_COMMANDER
+  AVENGER_LEAD
+  STRATEGIC_TACTICIAN
+  FIELD_AGENT
+  TECH_SPECIALIST
+  GUARDIAN_DEFENDER
+  ADMIN
+  MANAGER
+  AGENT
+}
+
+enum AssignmentRole {
+  SHIELD_DIRECTOR
+  STARK_TECH_ADVISOR
+  VIBRANIUM_SPECIALIST
+  MULTIVERSE_GUARDIAN
+  HEAD_TACTICIAN
+  FIELD_LEAD
+  ACCOUNT_OWNER
+  SUPPORT_LEAD
+  SALES_REP
+}
+
+enum NotificationType {
+  ASSIGNMENT
+  CRON_REMINDER
+  SYSTEM
+}
+
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  role          Role           @default(AGENT)
+  assignments   Assignment[]
+  notifications Notification[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Company {
+  id          String       @id @default(uuid())
+  name        String
+  industry    String?
+  website     String?
+  contacts    Contact[]
+  assignments Assignment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Contact {
+  id          String       @id @default(uuid())
+  name        String
+  email       String
+  phone       String?
+  companyId   String?
+  company     Company?     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  assignments Assignment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Assignment {
+  id        String         @id @default(uuid())
+  role      AssignmentRole @default(ACCOUNT_OWNER)
+  userId    String
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyId String?
+  company   Company?       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  contactId String?
+  contact   Contact?       @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  createdAt DateTime       @default(now())
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      NotificationType @default(ASSIGNMENT)
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+}
