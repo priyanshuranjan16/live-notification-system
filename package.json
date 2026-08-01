@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "prisma": {
-    "seed": "npx tsx prisma/seed.ts"
+    "seed": "bunx prisma db seed"
   },
   "dependencies": {
     "@prisma/client": "5.22.0",
