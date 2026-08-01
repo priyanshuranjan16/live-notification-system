@@ -165,16 +165,6 @@ Open your browser and visit: **`http://localhost:3000`**
 
 ---
 
-## 📜 Available Bun Scripts
 
-| Script | Command | Description |
-| :--- | :--- | :--- |
-| **`bun dev`** | `bun run dev` | Starts the custom Express + Socket.IO + Next.js server |
-| **`bun run build`** | `bun run build` | Compiles the Next.js frontend for production |
-| **`bun start`** | `bun start` | Runs the compiled server in production mode |
-| **`bunx prisma studio`** | `bunx prisma studio` | Opens interactive Prisma GUI for database inspection |
-| **`bunx prisma db seed`**| `bunx prisma db seed` | Executes initial seed script (`prisma/seed.ts`) |
-
----
 
 
