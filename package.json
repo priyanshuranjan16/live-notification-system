@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node server/server.js",
-    "build": "next build",
+    "build": "bunx prisma db push && bunx prisma db seed && next build",
     "start": "NODE_ENV=production node server/server.js",
     "lint": "eslint"
   },
